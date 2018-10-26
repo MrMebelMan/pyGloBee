@@ -1,7 +1,7 @@
 from globee.resources.request import GlobeeRequest
 
 
-class GloBee:
+class Globee:
 
     def __init__(self, api_key, api_secret, testnet=False):
         self.api_key = api_key
