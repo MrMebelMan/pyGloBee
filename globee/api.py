@@ -20,12 +20,19 @@ class Globee:
         return GlobeeGetRequest(self.api_key, endpoint).ok
 
 
-    def request_payment(self, total, email, currency='USD',
-                        customer_name='',
-                        payment_id='', store_reference='',
-                        callback_data=None, notification_email='',
-                        confirmation_speed='medium',
-                        success_url='', cancel_url='', ipn_url=''):
+    def request_payment(self,
+                        total,
+                        email,
+                        currency           = 'EUR',
+                        customer_name      = '',
+                        payment_id         = '',
+                        store_reference    = '',
+                        callback_data      = None,
+                        notification_email = '',
+                        confirmation_speed = 'medium',
+                        success_url        = '',
+                        cancel_url         = '',
+                        ipn_url            = ''):
 
         request_data = {
           "total": total,

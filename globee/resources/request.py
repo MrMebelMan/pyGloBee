@@ -24,7 +24,7 @@ class GlobeeGetRequest(Result):
             self.ok = response.ok
             self.reason = response.reason
             self.text = response.text
-            self.json = response.json
+            self.json = response.json()
         except Exception as e:
             print(e)
             self.exception = e
@@ -34,7 +34,7 @@ class GlobeeGetRequest(Result):
 
 
 class GlobeePaymentRequest():
-    REQUEST_STATUSES = {
+    STATUSES = {
             'unpaid':      'All payment-requests start in the unpaid state, ready to receive payment.',
             'paid':        'The payment request has been paid, waiting for required number of confirmations.',
             'underpaid':   'Payment has been received, however, the user has paid less than the amount requested. '
