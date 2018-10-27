@@ -15,6 +15,8 @@ class GlobeePaymentResponse(Result):
         self.reason = response.reason
         self.text = response.text
         self.json = response.json()
+        self.redirect_url = ''
+        self.payment_id = ''
 
         if self.status_code == 404:
             raise Globee404NotFound()
@@ -23,4 +25,7 @@ class GlobeePaymentResponse(Result):
             raise Globee422UnprocessableEntity(self.errors)
         elif self.status_code != 200 or not self.json['success']:
             raise ValidationError('%d: %s' % (self.status_code, self.response))
+
+        self.redirect_url = self.json['data']['redirect_url']
+        self.payment_id = self.json['data']['id']
 
