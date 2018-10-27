@@ -1,1 +1,1 @@
-# Python GloBee API
+# Python GloBee API (WIP)
