@@ -21,4 +21,6 @@ class GlobeePaymentResponse(Result):
         elif self.status_code == 422:
             self.errors = self.json['errors']
             raise Globee422UnprocessableEntity(self.errors)
+        elif self.status_code != 200 or not self.json['success']:
+            raise ValidationError('%d: %s' % (self.status_code, self.response))
 

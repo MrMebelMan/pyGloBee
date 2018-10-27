@@ -12,22 +12,18 @@ class GlobeeGetRequest(Result):
             'X-AUTH-KEY': api_key,
         }
         
-        try:
-            response = get(
-                endpoint,
-                headers=headers,
-                verify=True,
-                timeout=5
-            )
+        response = get(
+            endpoint,
+            headers=headers,
+            verify=True,
+            timeout=5
+        )
 
-            self.status_code = response.status_code
-            self.ok = response.ok
-            self.reason = response.reason
-            self.text = response.text
-            self.json = response.json()
-        except Exception as e:
-            print(e)
-            self.exception = e
+        self.status_code = response.status_code
+        self.ok = response.ok
+        self.reason = response.reason
+        self.text = response.text
+        self.json = response.json()
 
     def __str__(self):
         return '%d: %s' % (self.status_code, self.reason)
@@ -61,18 +57,13 @@ class GlobeePaymentRequest():
             'X-AUTH-KEY': api_key,
         }
 
-        response = None
-        try:
-            response = post(
-                endpoint + 'payment-request',
-                headers=headers,
-                json=data,
-                verify=True,
-                timeout=5
-            )
-            
-        except Exception as e:
-            print(e)
+        response = post(
+            endpoint + 'payment-request',
+            headers=headers,
+            json=data,
+            verify=True,
+            timeout=5
+        )
 
         self.response = GlobeePaymentResponse(response)
 
