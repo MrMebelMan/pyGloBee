@@ -9,3 +9,4 @@ class Result():
 
     def __str__(self):
         return '%d: %s\n%s' % (self.status_code, self.reason, self.json)
+

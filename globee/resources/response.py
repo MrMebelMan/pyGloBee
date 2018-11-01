@@ -10,6 +10,7 @@ class GlobeePaymentResponse(Result):
         super().__init__()
 
         self.errors = []
+        self.response = response
         self.status_code = response.status_code
         self.ok = response.ok
         self.reason = response.reason
@@ -24,7 +25,7 @@ class GlobeePaymentResponse(Result):
             self.errors = self.json['errors']
             raise Globee422UnprocessableEntity(self.errors)
         elif self.status_code != 200 or not self.json['success']:
-            raise ValidationError('%d: %s' % (self.status_code, self.response))
+            raise Exception('%s: %s' % (self.response, self.reason))
 
         self.redirect_url = self.json['data']['redirect_url']
         self.payment_id = self.json['data']['id']
