@@ -45,7 +45,7 @@ class GlobeePaymentRequest():
             'draft':       'Invoice has been saved as a draft and not yet active.',
     }
 
-    def __init__(self, api_key='', endpoint='', data=None)):
+    def __init__(self, api_key='', endpoint='', data=None):
         self.response = None
         
         if not data:
