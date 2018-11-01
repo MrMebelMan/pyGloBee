@@ -4,7 +4,7 @@ from globee.resources.request import (
 
 
 class Globee:
-    def __init__(self, api_key, api_secret, testnet=False):
+    def __init__(self, api_key, api_secret, testnet=True):
         self.api_key = api_key
         self.api_secret = api_secret
 
