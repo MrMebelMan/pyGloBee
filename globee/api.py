@@ -33,7 +33,7 @@ class Globee:
     ):
 
         request_data = {
-            "total": total,
+            "total": float(total),
             "currency": currency,
             "customer": {"email": email},
         }
