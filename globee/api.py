@@ -53,8 +53,11 @@ class Globee:
         }
 
         remove_empty_keys(request_data)
+
         request = GlobeePaymentRequest(
-            api_key=self.api_key, endpoint=self.api_url, data=request_data
+            api_key=self.api_key,
+            endpoint=self.api_url,
+            data=request_data
         )
 
         return request.response
