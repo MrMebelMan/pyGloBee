@@ -1,9 +1,15 @@
 from globee.resources.request import GlobeeGetRequest, GlobeePaymentRequest
 from globee.resources.utils import remove_empty_keys
+from globee.resources.exceptions import GlobeeMissingCredentials
 
 
 class Globee:
     def __init__(self, api_key, api_secret, testnet=True):
+	if not api_key:
+            raise GlobeeMissingCredentials('api_key')
+        elif not api_secret:
+            raise GlobeeMissingCredentials('api_secret')
+
         self.api_key = api_key
         self.api_secret = api_secret
 
