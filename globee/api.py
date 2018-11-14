@@ -1,4 +1,5 @@
 from globee.resources.request import GlobeeGetRequest, GlobeePaymentRequest
+from globee.resources.utils import remove_empty_keys
 
 
 class Globee:
@@ -32,41 +33,26 @@ class Globee:
         ipn_url="",
     ):
 
+        customer_data = {
+            "email": email,
+            "name": customer_name,
+        }
+
         request_data = {
             "total": float(total),
             "currency": currency,
-            "customer": {"email": email},
+            "customer": customer_data,
+            "custom_payment_id": payment_id,
+            "custom_store_reference": store_reference,
+            "callback_data": callback_data,
+            "notification_email": notification_email,
+            "confirmation_speed": confirmation_speed,
+            "success_url": success_url,
+            "cancel_url": cancel_url,
+            "ipn_url": ipn_url,
         }
 
-        # Optional
-        if payment_id:
-            request_data["custom_payment_id"] = payment_id
-
-        if store_reference:
-            request_data["custom_store_reference"] = store_reference
-
-        if callback_data:
-            request_data["callback_data"] = callback_data
-
-        if notification_email:
-            request_data["notification_email"] = notification_email
-
-        if confirmation_speed:
-            request_data["confirmation_speed"] = confirmation_speed
-
-        # Recommended
-        if customer_name:
-            request_data["customer"]["name"] = customer_name
-
-        if success_url:
-            request_data["success_url"] = success_url
-
-        if cancel_url:
-            request_data["cancel_url"] = cancel_url
-
-        if ipn_url:
-            request_data["ipn_url"] = ipn_url
-
+        remove_empty_keys(request_data)
         request = GlobeePaymentRequest(
             api_key=self.api_key, endpoint=self.api_url, data=request_data
         )
