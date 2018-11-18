@@ -8,10 +8,10 @@ class Globee404NotFound(Exception):
 
 
 class Globee422UnprocessableEntity(Exception):
-    def __init__(self, errors=list()):
+    def __init__(self, errors):
         super().__init__()
         self.message = "Payment Request returned 422:"
-        self.errors = errors
+        self.errors = errors or []
 
     def __str__(self):
         ret = "%s\n" % self.message
@@ -21,3 +21,13 @@ class Globee422UnprocessableEntity(Exception):
             ret += "\tfield: %s\n" % error["field"]
             ret += "\tmessage: %s\n" % error["message"]
         return ret
+
+
+class GlobeeMissingCredentials(Exception):
+    def __init__(self, missing_key_name):
+        super().__init__()
+        self.message = "The '%s' is missing!" % missing_key_name
+
+    def __str__(self):
+        return self.message
+
