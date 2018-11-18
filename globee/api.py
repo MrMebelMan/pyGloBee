@@ -23,31 +23,29 @@ class GlobeePayment:
 
     def __init__(self, json):
         self.success = json['success']
-        data = json['data']
+        self.json = json['data']
         
-        self.adjusted_total = data["adjusted_total"]
-        self.callback_data = data["callback_data"]
-        self.cancel_url = data["cancel_url"]
-        self.confirmation_speed = data["confirmation_speed"]
-        self.created_at = data["created_at"]
-        self.currency = data["currency"]
-        self.custom_payment_id = data["custom_payment_id"]
-        self.custom_store_reference = data["custom_store_reference"]
-        self.expires_at = data["expires_at"]
-        self.id = data["id"]
-        self.ipn_url = data["ipn_url"]
-        self.notification_email = data["notification_email"]
-        self.redirect_url = data["redirect_url"]
-        self.status = data["status"]
-        self.success_url = data["success_url"]
-        self.total = Decimal(data["total"])
-        
-        self.customer_name = data['customer']['name']
-        self.customer_email = data['customer']['email']
-        
-        self.payment_currency = data['payment_details']['currency']
-        self.received_amount = Decimal(data['payment_details']['received_amount'] or '0')
-        self.received_difference = Decimal(data['payment_details']['received_difference'] or '0')
+        self.adjusted_total         = self.json["adjusted_total"]
+        self.callback_data          = self.json["callback_data"]
+        self.cancel_url             = self.json["cancel_url"]
+        self.confirmation_speed     = self.json["confirmation_speed"]
+        self.created_at             = self.json["created_at"]
+        self.currency               = self.json["currency"]
+        self.custom_payment_id      = self.json["custom_payment_id"]
+        self.custom_store_reference = self.json["custom_store_reference"]
+        self.expires_at             = self.json["expires_at"]
+        self.id                     = self.json["id"]
+        self.ipn_url                = self.json["ipn_url"]
+        self.notification_email     = self.json["notification_email"]
+        self.redirect_url           = self.json["redirect_url"]
+        self.status                 = self.json["status"]
+        self.success_url            = self.json["success_url"]
+        self.total                  = Decimal(self.json["total"])
+        self.customer_name          = self.json['customer']['name']
+        self.customer_email         = self.json['customer']['email']
+        self.payment_currency       = self.json['payment_details']['currency']
+        self.received_amount        = Decimal(self.json['payment_details']['received_amount'] or '0')
+        self.received_difference    = Decimal(self.json['payment_details']['received_difference'] or '0')
 
     def __str__(self):
         return "GloBee Payment #%s (%.2f %s), created: %s, status: %s" \
