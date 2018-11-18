@@ -56,8 +56,9 @@ class Globee:
     def __init__(self, api_key, api_secret, testnet=True):
         if not api_key:
             raise GlobeeMissingCredentials('api_key')
-        elif not api_secret:
-            raise GlobeeMissingCredentials('api_secret')
+        ## api_secret is reserved for future use, not active yet
+        # elif not api_secret:
+        #     raise GlobeeMissingCredentials('api_secret')
 
         self.api_key = api_key
         self.api_secret = api_secret
