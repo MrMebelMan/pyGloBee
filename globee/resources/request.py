@@ -3,19 +3,16 @@ from .result import Result
 from .response import GlobeePaymentResponse
 
 
-class GlobeeGetRequest(Result):
+class GlobeePingRequest:
     def __init__(self, api_key, endpoint):
         super().__init__()
 
         headers = {"Accept": "application/json", "X-AUTH-KEY": api_key}
-
-        response = get(endpoint, headers=headers, verify=True, timeout=5)
+        response = get(endpoint + 'ping', headers=headers, verify=True, timeout=5)
 
         self.status_code = response.status_code
         self.ok = response.ok
         self.reason = response.reason
-        self.text = response.text
-        self.json = response.json()
 
     def __str__(self):
         return "%d: %s" % (self.status_code, self.reason)

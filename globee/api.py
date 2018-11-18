@@ -1,4 +1,4 @@
-from globee.resources.request import GlobeeGetRequest, GlobeePaymentRequest
+from globee.resources.request import GlobeePingRequest, GlobeePaymentRequest
 from globee.resources.utils import remove_empty_keys
 from globee.resources.exceptions import GlobeeMissingCredentials
 
@@ -20,8 +20,7 @@ class Globee:
 
     @property
     def available(self):
-        endpoint = self.api_url + "ping"
-        return GlobeeGetRequest(self.api_key, endpoint).ok
+        return GlobeePingRequest(self.api_key, self.api_url).ok
 
     def request_payment(
         self,
