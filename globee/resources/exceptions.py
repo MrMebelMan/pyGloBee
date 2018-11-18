@@ -31,3 +31,11 @@ class GlobeeMissingCredentials(Exception):
     def __str__(self):
         return self.message
 
+
+class GlobeePaymentError(Exception):
+    def __init__(self, missing_key_name):
+        super().__init__()
+        self.message = "The %s field is missing!" % missing_key_name
+
+    def __str__(self):
+        return self.message

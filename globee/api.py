@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 
 from .resources.request import GlobeePingRequest, GlobeePaymentRequest
 from .resources.utils import remove_empty_keys
-from .resources.exceptions import GlobeeMissingCredentials
+from .resources.exceptions import GlobeeMissingCredentials, GlobeePaymentError
 from json import dumps as json_dumps
 from decimal import Decimal
 
@@ -49,7 +49,7 @@ class GlobeePayment:
             self.received_amount        = Decimal(self.json['payment_details']['received_amount'] or '0')
             self.received_difference    = Decimal(self.json['payment_details']['received_difference'] or '0')
         except KeyError as e:
-            raise ValidationError('GlobeePayment error: %s not found' % e)
+            raise GlobeePaymentError(e)
 
     def __str__(self):
         return 'GloBee Payment #%s (%.2f %s), created: %s, status: %s' \
