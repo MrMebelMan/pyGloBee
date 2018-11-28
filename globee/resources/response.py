@@ -1,4 +1,5 @@
 from .result import Result
+from json import dumps as json_dumps
 
 from .exceptions import Globee404NotFound, Globee422UnprocessableEntity
 
